@@ -1,8 +1,9 @@
 // Quick Tunnel(登録不要の trycloudflare)を張り続け、切断とURL変化を記録する計測用スクリプト。
 // 1分ごとにトンネル経由で /healthz を叩き、log.tsv に追記する。落ちたら張り直す(URLは変わる)。
 import { spawn } from 'node:child_process';
-import { appendFileSync, existsSync, readFileSync, writeFileSync } from 'node:fs';
-import { createHmac, randomBytes } from 'node:crypto';
+import { appendFileSync, writeFileSync } from 'node:fs';
+import { createHmac } from 'node:crypto';
+import * as secrets from '../bridge/secrets.mjs';
 import { join } from 'node:path';
 
 const here = new URL('.', import.meta.url).pathname;
@@ -15,11 +16,8 @@ const DEAD_AFTER = 5; // 連続失敗がこの回数(=5分)でトンネル死亡
 // 連絡板(ntfy.sh)。トピック名は推測できない乱数、URL にはトークンで署名してなりすましを防ぐ
 const NTFY = process.env.NTFY || 'https://ntfy.sh';
 const PUBLISH_MS = 60 * 60_000; // ntfy.sh の保持期限より短い間隔で書き直す
-const bridgeDir = join(here, '../bridge');
-const topicFile = join(bridgeDir, '.topic');
-if (!existsSync(topicFile)) writeFileSync(topicFile, 'eho-' + randomBytes(12).toString('base64url'), { mode: 0o600 });
-const TOPIC = readFileSync(topicFile, 'utf8').trim();
-const TOKEN = readFileSync(join(bridgeDir, '.token'), 'utf8').trim();
+const TOPIC = secrets.topic();
+const TOKEN = secrets.token();
 
 async function publish() {
   if (!url) return;

@@ -367,7 +367,7 @@ async function main() {
   bridge = await waitForEvenAppBridge();
   // QR の URL に ?token=&base= があれば端末に保存する(以降は無くてよい)
   const q = new URLSearchParams(location.search);
-  for (const k of ['token', 'base', 'code']) {
+  for (const k of ['token', 'base', 'code', 'lang']) {
     // evenhub qr は QR 内の & を &amp; にするため "amp;base" でも受ける
     const v = q.get(k) ?? q.get(`amp;${k}`);
     if (v != null) await bridge.setLocalStorage(k, v);

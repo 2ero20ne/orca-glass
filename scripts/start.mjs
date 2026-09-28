@@ -17,4 +17,5 @@ const procs = [
   });
   return p;
 });
-process.on('SIGINT', () => procs.forEach((p) => p.kill()));
+// Ctrl+C でも kill でも、子(bridge・トンネル)を残さない
+for (const sig of ['SIGINT', 'SIGTERM']) process.on(sig, () => procs.forEach((p) => p.kill()));

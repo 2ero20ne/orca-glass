@@ -2,12 +2,13 @@
 // アプリの静的ファイルも同じオリジンで配るので、CORS は不要。
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { randomBytes, timingSafeEqual } from 'node:crypto';
+import { timingSafeEqual } from 'node:crypto';
 import { extname, join, normalize } from 'node:path';
 import * as o from './orca.mjs';
+import * as secrets from './secrets.mjs';
 import { transcribe } from './whisper.mjs';
 
 const here = new URL('.', import.meta.url).pathname;
@@ -19,9 +20,7 @@ const config = JSON.parse(readFileSync(join(here, 'config.json'), 'utf8'));
 const localFile = join(here, 'config.local.json');
 if (existsSync(localFile)) Object.assign(config, JSON.parse(readFileSync(localFile, 'utf8')));
 
-const tokenFile = join(here, '.token');
-if (!existsSync(tokenFile)) writeFileSync(tokenFile, randomBytes(18).toString('base64url'), { mode: 0o600 });
-const TOKEN = process.env.EHO_TOKEN || readFileSync(tokenFile, 'utf8').trim();
+const TOKEN = process.env.EHO_TOKEN || secrets.token();
 
 function authorized(req) {
   const got = Buffer.from(req.headers.authorization?.replace(/^Bearer /, '') || '');
