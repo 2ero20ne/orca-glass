@@ -43,7 +43,7 @@ Mac 側の準備が必要です。Orca Glass は、あなたの Mac で動く小
 - The app needs a companion bridge running on the user's own Mac (open source, linked above). Without it the app shows setup instructions.
 - Network: the app contacts ntfy.sh (listed) to find the user's bridge URL, then the user's own Cloudflare Quick Tunnel URL (`https://<random>.trycloudflare.com`, different for every user, so it cannot be listed in the whitelist). All bridge requests require the user's token; URLs from ntfy are accepted only with a valid HMAC signature.
 - Microphone: used only when the user chooses a voice reply; audio is sent to the user's own Mac for transcription.
-- To try it, we can provide a test bridge on request.
+- To review without a Mac: open the app and tap **Try the demo (no Mac needed)**. Every screen (threads, answer, replies, voice reply, new session, usage) works with sample data.
 
 ## Assets to prepare
 
