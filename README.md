@@ -1,5 +1,7 @@
 # Orca Glass
 
+[日本語](README.ja.md)
+
 Control [Orca](https://github.com/stablyai/orca) agent sessions from **Even Realities G2** glasses — from anywhere.
 
 - **Threads** — see every Claude / Codex session, which ones are waiting for you, and the latest answer (tool output and thinking filtered out)
@@ -24,9 +26,10 @@ G2 ⇄ Even app (Orca Glass) ⇄ Cloudflare Quick Tunnel ⇄ Mac bridge ⇄ orca
 ## Setup
 
 1. Install **Orca Glass** from Even Hub on your phone.
-2. Install this skill in your coding agent and ask it to set things up.
-   - Claude Code: `/plugin marketplace add 2ero20ne/orca-glass` → `/plugin install orca-glass@orca-glass` → "Set up Orca Glass"
-   - Other agents: clone this repo and point your agent at `skills/orca-glass-setup/SKILL.md`
+2. Install the setup skill in your coding agent and ask it to "set up Orca Glass".
+   - Orca: install from the [Orca skill link](https://share.onorca.dev/skills/share/shr_d60bfc61c56982da57cd656cd0314f5d253ee99a77539873)
+   - Claude Code: `/plugin marketplace add 2ero20ne/orca-glass` → `/plugin install orca-glass@orca-glass`
+   - Other agents: `git clone https://github.com/2ero20ne/orca-glass.git ~/orca-glass` and point your agent at `skills/orca-glass-setup/SKILL.md`
 3. Paste the pairing code the agent gives you into Orca Glass on the phone. That's it — it reconnects automatically when the tunnel URL changes.
 
 Just want to look? Tap **Try the demo** in the app — no Mac needed.
