@@ -10,7 +10,16 @@ Orca Glass has two halves:
 - **Glasses app** — installed by the user from Even Hub on their phone. Nothing to build here.
 - **Mac bridge** (this repository) — a small Node server that wraps the `orca` CLI, plus a Cloudflare Quick Tunnel so the glasses can reach it from anywhere. The tunnel URL is announced to the app through ntfy.sh, signed with the bridge token, so the user pairs only once.
 
-Work from the repository root. Do every step yourself; only stop for the user where a step says so.
+Do every step yourself; only stop for the user where a step says so.
+
+## 0. Get the code into a stable folder
+
+The bridge stores its token and pairing topic next to its code, so it must run from a folder that survives updates — **not** from the plugin cache (a plugin update replaces that folder and the user would have to pair again).
+
+- If the current directory is already an `orca-glass` checkout, use it.
+- Otherwise use `~/orca-glass`: clone it if missing (`git clone https://github.com/2ero20ne/orca-glass.git ~/orca-glass`), or `git -C ~/orca-glass pull` if it exists. Ask first if the user prefers another folder.
+
+Run every command below from that folder.
 
 ## 1. Check prerequisites
 
