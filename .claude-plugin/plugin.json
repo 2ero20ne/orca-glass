@@ -1,0 +1,7 @@
+{
+  "name": "orca-glass",
+  "description": "Set up Orca Glass: control Orca agent sessions from Even Realities G2 glasses",
+  "version": "1.0.0",
+  "author": { "name": "2ero20ne" },
+  "license": "MIT"
+}

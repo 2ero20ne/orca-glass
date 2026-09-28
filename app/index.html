@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orca Glass</title>
+    <style>
+      body { font: 15px/1.5 -apple-system, sans-serif; margin: 16px; background: #111; color: #eee; }
+      label { display: block; margin-top: 12px; font-size: 13px; color: #aaa; }
+      input, select { width: 100%; box-sizing: border-box; padding: 8px; font-size: 14px; background: #222; color: #eee; border: 1px solid #444; border-radius: 6px; }
+      button { margin-top: 14px; padding: 10px 16px; font-size: 15px; border: 0; border-radius: 6px; background: #3a7; color: #fff; }
+      pre { white-space: pre-wrap; word-break: break-all; background: #1b1b1b; padding: 10px; border-radius: 6px; font-size: 12px; }
+      a { color: #7cd; }
+    </style>
+  </head>
+  <body>
+    <h3>Orca Glass</h3>
+    <p data-i18n="pageIntro"></p>
+    <details open>
+      <summary style="font-weight:bold" data-i18n="setupTitle"></summary>
+      <ol style="padding-left:20px;font-size:14px" data-i18n="setupSteps"></ol>
+    </details>
+    <details>
+      <summary style="font-weight:bold" data-i18n="opsTitle"></summary>
+      <ul style="padding-left:20px;font-size:14px" data-i18n="opsList"></ul>
+    </details>
+    <form id="conn">
+      <label data-i18n="codeLabel"></label>
+      <input id="code" placeholder="eho1.…" autocomplete="off" />
+      <label data-i18n="langLabel"></label>
+      <select id="lang"><option value="auto">Auto</option><option value="ja">日本語</option><option value="en">English</option></select>
+      <details>
+        <summary style="margin-top:12px;color:#aaa;font-size:13px" data-i18n="manualSummary"></summary>
+        <label data-i18n="baseLabel"></label>
+        <input id="base" placeholder="https://xxxx.trycloudflare.com" autocomplete="off" />
+        <label data-i18n="tokenLabel"></label>
+        <input id="token" autocomplete="off" />
+      </details>
+      <button type="submit" data-i18n="save"></button>
+      <button type="button" id="demo" data-i18n="tryDemo" style="background:#555"></button>
+    </form>
+    <label data-i18n="diagLabel"></label>
+    <pre id="diag">…</pre>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

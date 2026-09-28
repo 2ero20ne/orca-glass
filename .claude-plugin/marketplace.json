@@ -1,0 +1,14 @@
+{
+  "name": "orca-glass",
+  "description": "Orca Glass \u2014 control Orca agent sessions from Even Realities G2 glasses",
+  "owner": {
+    "name": "2ero20ne"
+  },
+  "plugins": [
+    {
+      "name": "orca-glass",
+      "source": "./",
+      "description": "Set up Orca Glass: control Orca agent sessions from Even Realities G2 glasses"
+    }
+  ]
+}
