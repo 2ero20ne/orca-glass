@@ -1,4 +1,4 @@
-// 中継サーバ(bridge/server.mjs)の API クライアント。base が空ならアプリと同じオリジンを使う。
+// 接続コードで解決した中継サーバ(bridge/server.mjs)の API クライアント。
 import { demoCall } from './demo';
 import type { Lang } from './i18n';
 let token = '';
@@ -28,6 +28,7 @@ export const currentBase = () => base;
 
 async function call<T>(method: 'GET' | 'POST', path: string, body?: unknown): Promise<T> {
   if (demo) return demoCall(lang, method, path, body) as T;
+  if (!base) throw new Error('Bridge is not connected');
   const binary = body instanceof Uint8Array;
   const req = () =>
     fetch(`${base}${path}${path.includes('?') ? '&' : '?'}lang=${lang}`, {

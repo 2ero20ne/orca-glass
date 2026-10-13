@@ -321,31 +321,25 @@ async function connect() {
   const code = await bridge.getLocalStorage('code');
   const pairing = parseCode(code);
   $('code').value = code;
-  $('base').value = await bridge.getLocalStorage('base');
-  $('token').value = await bridge.getLocalStorage('token');
   const t0 = Date.now();
   setDemo(code === 'demo');
   if (code === 'demo') {
     diag(tr('diagOk', 0, tr('viaDemo'), '-', 3));
     return home();
   }
-  if (!pairing && !$('token').value) {
+  if (!pairing) {
     diag(tr('notPairedDiag'));
     return show({ kind: 'text', title: 'Orca Glass', text: tr('notPaired') });
   }
   try {
-    if (pairing) {
-      const base = await resolveBase(pairing);
-      if (!base) throw new Error(tr('noRelay'));
-      setConnection({ token: pairing.token, base, resolve: () => resolveBase(pairing) });
-    } else {
-      setConnection({ token: $('token').value, base: $('base').value });
-    }
+    const base = await resolveBase(pairing);
+    if (!base) throw new Error(tr('noRelay'));
+    setConnection({ token: pairing.token, base, resolve: () => resolveBase(pairing) });
     await api.health();
     const threads = await api.threads();
-    diag(tr('diagOk', Date.now() - t0, tr(pairing ? 'viaCode' : 'viaManual'), currentBase() || location.origin, threads.length));
+    diag(tr('diagOk', Date.now() - t0, tr('viaCode'), currentBase(), threads.length));
   } catch (e) {
-    diag(tr('diagNg', (e as Error).message, tr(pairing ? 'viaCode' : 'viaManual'), currentBase() || location.origin));
+    diag(tr('diagNg', (e as Error).message, tr('viaCode'), currentBase()));
     return show({
       kind: 'text',
       title: tr('offlineTitle'),
@@ -365,10 +359,10 @@ function useLang(pref: string) {
 
 async function main() {
   bridge = await waitForEvenAppBridge();
-  // QR の URL に ?token=&base= があれば端末に保存する(以降は無くてよい)
+  // 開発用URLからも接続コードと言語だけを読み込む
   const q = new URLSearchParams(location.search);
-  for (const k of ['token', 'base', 'code', 'lang']) {
-    // evenhub qr は QR 内の & を &amp; にするため "amp;base" でも受ける
+  for (const k of ['code', 'lang']) {
+    // evenhub qr は QR 内の & を &amp; にするため "amp;lang" でも受ける
     const v = q.get(k) ?? q.get(`amp;${k}`);
     if (v != null) await bridge.setLocalStorage(k, v);
   }
@@ -382,8 +376,6 @@ async function main() {
     const code = $('code').value.trim();
     if (code && code !== 'demo' && !parseCode(code)) return diag(tr('badCode'));
     await bridge.setLocalStorage('code', code);
-    await bridge.setLocalStorage('base', $('base').value.trim());
-    await bridge.setLocalStorage('token', $('token').value.trim());
     await connect();
   });
   $('demo').addEventListener('click', async () => {

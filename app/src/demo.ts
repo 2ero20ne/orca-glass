@@ -42,15 +42,18 @@ const content = {
 
 export function demoCall(lang: Lang, method: string, path: string, body: unknown): unknown {
   const c = content[lang];
-  const url = new URL(path, 'http://demo');
+  // APIパスとクエリだけが必要。ホスト名を持つ仮URLは作らない。
+  const queryStart = path.indexOf('?');
+  const pathname = queryStart === -1 ? path : path.slice(0, queryStart);
+  const searchParams = new URLSearchParams(queryStart === -1 ? '' : path.slice(queryStart + 1));
   const b = (body ?? {}) as Record<string, unknown>;
-  switch (`${method} ${url.pathname}`) {
+  switch (`${method} ${pathname}`) {
     case 'GET /healthz':
       return { ok: true };
     case 'GET /api/threads':
       return c.threads.map(([handle, title, agent, state]) => ({ handle, title, agent, state }) as Thread);
     case 'GET /api/thread':
-      return { text: c.texts[url.searchParams.get('handle') as keyof typeof c.texts] ?? '' };
+      return { text: c.texts[searchParams.get('handle') as keyof typeof c.texts] ?? '' };
     case 'GET /api/replies':
       return c.replies;
     case 'POST /api/reply':
@@ -79,6 +82,6 @@ export function demoCall(lang: Lang, method: string, path: string, body: unknown
     case 'POST /api/session':
       return { handle: 'demo-new', sent: true };
     default:
-      throw new Error(`demo: ${method} ${url.pathname}`);
+      throw new Error(`demo: ${method} ${pathname}`);
   }
 }

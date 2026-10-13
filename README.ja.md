@@ -13,8 +13,8 @@
 | スレッド一覧 | 最新の回答 | 返信 |
 | --- | --- | --- |
 | ![スレッド一覧](store/screenshots/1-threads.png) | ![最新の回答](store/screenshots/2-answer.png) | ![返信](store/screenshots/3-reply.png) |
-| **使用量** | **新規セッション** | **スマホの設定画面** |
-| ![使用量](store/screenshots/4-usage.png) | ![新規セッション](store/screenshots/5-new-session.png) | <img src="store/screenshots/phone-setup.png" width="220" alt="スマホの設定画面"> |
+| **使用量** | **新規セッション** | **スマホでの接続** |
+| ![使用量](store/screenshots/4-usage.png) | ![新規セッション](store/screenshots/5-new-session.png) | Macで `npm run pair` を実行し、出たコードをアプリに貼り付けます。 |
 
 <sub>グラスの画面(576×288)は、アプリ内のデモ(架空のデータ)で撮影しています。アプリの「デモを試す」で、Mac がなくても同じ画面を確認できます。</sub>
 
@@ -31,6 +31,8 @@ G2 ⇄ Even アプリ(Orca Glass) ⇄ Cloudflare Quick Tunnel ⇄ Mac の中継�
    - Claude Code: `/plugin marketplace add 2ero20ne/orca-glass` → `/plugin install orca-glass@orca-glass`
    - その他のエージェント: `git clone https://github.com/2ero20ne/orca-glass.git ~/orca-glass` して、`skills/orca-glass-setup/SKILL.md` を読ませる
 3. エージェントが出した「接続コード」を、スマホの Orca Glass に貼り付ける。これで完了です。トンネルの URL が変わっても自動でつながり直します。
+
+接続設定は接続コードだけを使います。
 
 見てみるだけなら、アプリの **「デモを試す」** を押してください。Mac は不要です。
 

@@ -8,4 +8,9 @@ tunnel/current-url
 bridge/.topic
 bridge/config.local.json
 INTERNAL.md
+store/review-*/
+store/screenshots/review-*/
+.env
+.env.*
+!.env.example
 .DS_Store

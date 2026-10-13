@@ -1,11 +1,11 @@
 {
   "name": "orca-glass",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "sim": "evenhub-simulator http://127.0.0.1:8787/?token=$(cat ../bridge/.token) --automation-port 9898",
+    "sim": "evenhub-simulator http://127.0.0.1:8787/ --automation-port 9898",
     "bridge": "node ../bridge/server.mjs"
   },
   "author": "",

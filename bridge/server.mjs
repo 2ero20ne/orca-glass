@@ -172,7 +172,7 @@ createServer(async (req, res) => {
     send(res, 500, { error: String(e.message || e) });
   }
 }).listen(PORT, HOST, () => {
-  console.log(`evenhub-orca bridge: http://${HOST}:${PORT}/?token=${TOKEN}`);
+  console.log(`evenhub-orca bridge: http://${HOST}:${PORT}/ (pair with npm run pair)`);
 });
 
 function send(res, status, data) {

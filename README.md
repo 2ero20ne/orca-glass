@@ -13,8 +13,8 @@ Control [Orca](https://github.com/stablyai/orca) agent sessions from **Even Real
 | Threads | Latest answer | Reply |
 | --- | --- | --- |
 | ![Threads](store/screenshots/1-threads.png) | ![Answer](store/screenshots/2-answer.png) | ![Reply](store/screenshots/3-reply.png) |
-| **Usage** | **New session** | **Phone: setup** |
-| ![Usage](store/screenshots/4-usage.png) | ![New session](store/screenshots/5-new-session.png) | <img src="store/screenshots/phone-setup.png" width="220" alt="Phone setup screen"> |
+| **Usage** | **New session** | **Phone: pairing** |
+| ![Usage](store/screenshots/4-usage.png) | ![New session](store/screenshots/5-new-session.png) | Run `npm run pair` on your Mac, then paste the code into the app. |
 
 <sub>Glasses screens (576×288) from the built-in demo with sample data — tap **Try the demo** in the app to see them without a Mac.</sub>
 
@@ -31,6 +31,8 @@ G2 ⇄ Even app (Orca Glass) ⇄ Cloudflare Quick Tunnel ⇄ Mac bridge ⇄ orca
    - Claude Code: `/plugin marketplace add 2ero20ne/orca-glass` → `/plugin install orca-glass@orca-glass`
    - Other agents: `git clone https://github.com/2ero20ne/orca-glass.git ~/orca-glass` and point your agent at `skills/orca-glass-setup/SKILL.md`
 3. Paste the pairing code the agent gives you into Orca Glass on the phone. That's it — it reconnects automatically when the tunnel URL changes.
+
+Connection setup uses the pairing code only.
 
 Just want to look? Tap **Try the demo** in the app — no Mac needed.
 
